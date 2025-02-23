@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:groomingo/styles/colors.dart';
+import 'package:groomingo/styles/colors.dart'
+    as AppColors; // Colors 클래스를 AppColors로 가져오기
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SignInScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -20,10 +21,12 @@ class SignInScreen extends StatelessWidget {
               children: [
                 // 로고 이미지
                 Container(
+                  width: deviceWidth * 0.8, // 기기의 너비의 80%로 설정
+                  height: 150,
                   child: Center(
                     child: Image.asset(
                       'assets/images/common/temp_logo.png', // 로고 이미지 경로
-                      fit: BoxFit.contain,
+                      fit: BoxFit.contain, // 이미지 비율 유지
                     ),
                   ),
                 ),
@@ -70,8 +73,60 @@ class SignInScreen extends StatelessWidget {
                   },
                   child: Text('로그인'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor_500,
-                    foregroundColor: Colors.white,
+                    backgroundColor:
+                        AppColors.AppColors.primaryColor_500, // 버튼 배경색 설정
+                    foregroundColor: Colors.white, // 텍스트 색상 설정
+                    textStyle:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    minimumSize: Size(double.infinity, 50),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                // 이메일 찾기 | 비밀번호 찾기 | 회원가입 버튼
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        // 이메일 찾기 로직 추가
+                      },
+                      child: Text('이메일 찾기'),
+                    ),
+                    Text(' | '),
+                    TextButton(
+                      onPressed: () {
+                        // 비밀번호 찾기 로직 추가
+                      },
+                      child: Text('비밀번호 찾기'),
+                    ),
+                    Text(' | '),
+                    TextButton(
+                      onPressed: () {
+                        // 회원가입 로직 추가
+                      },
+                      child: Text('회원가입'),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 120),
+                // 카카오로 시작하기 버튼
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // 카카오 로그인 로직 추가
+                  },
+                  icon: SvgPicture.asset(
+                    'assets/icons/login/kakao_logo.svg', // 카카오 로고 이미지 경로
+                    width: 24,
+                    height: 24,
+                  ),
+                  label: Text('카카오로 시작하기'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFFEE500), // 카카오 버튼 배경색
+                    foregroundColor: Colors.black, // 카카오 버튼 텍스트 색상
                     textStyle:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     minimumSize: Size(double.infinity, 50),
