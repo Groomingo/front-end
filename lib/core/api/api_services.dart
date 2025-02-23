@@ -16,6 +16,7 @@ class ApiService {
       print('response: ${response.data}, email: $email, password: $password');
       return response.data as String;
     } catch (e) {
+      print('error: ${e}');
       rethrow;
     }
   }

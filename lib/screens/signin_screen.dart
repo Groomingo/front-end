@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:groomingo/routes/routes.dart';
 import 'package:groomingo/models/user/user_repository.dart';
 import 'package:groomingo/styles/colors.dart'
     as AppColors; // Colors 클래스를 AppColors로 가져오기
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SignInScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -82,6 +86,14 @@ class SignInScreen extends StatelessWidget {
                         );
                         // 로그인 성공 처리
                         print('로그인 성공: $accessToken');
+
+                        // accessToken 및 이메일 저장
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setString('accessToken', accessToken);
+                        await prefs.setString('email', _emailController.text);
+
+                        // 홈 화면으로 이동
+                        context.go('/home');
                       } catch (e) {
                         // 로그인 실패 처리
                         if (e is DioException &&
