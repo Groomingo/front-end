@@ -1,10 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:groomingo/models/user/user_repository.dart';
 import 'package:groomingo/styles/colors.dart'
     as AppColors; // Colors 클래스를 AppColors로 가져오기
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignInScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final UserRepository _userRepository = UserRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,7 @@ class SignInScreen extends StatelessWidget {
                 SizedBox(height: 32),
                 // 이메일 입력 인풋
                 TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                     labelText: '이메일',
                     border: OutlineInputBorder(
@@ -49,6 +55,7 @@ class SignInScreen extends StatelessWidget {
                 SizedBox(height: 16),
                 // 비밀번호 입력 인풋
                 TextFormField(
+                  controller: _passwordController,
                   decoration: InputDecoration(
                     labelText: '비밀번호',
                     border: OutlineInputBorder(
@@ -66,9 +73,30 @@ class SignInScreen extends StatelessWidget {
                 SizedBox(height: 24),
                 // 로그인 버튼
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      // 로그인 로직 추가
+                      try {
+                        final accessToken = await _userRepository.signIn(
+                          _emailController.text,
+                          _passwordController.text,
+                        );
+                        // 로그인 성공 처리
+                        print('로그인 성공: $accessToken');
+                      } catch (e) {
+                        // 로그인 실패 처리
+                        if (e is DioException &&
+                            e.response?.statusCode == 401) {
+                          print('로그인 실패: 잘못된 이메일 또는 비밀번호입니다.');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('잘못된 이메일 또는 비밀번호입니다.')),
+                          );
+                        } else {
+                          print('로그인 실패: $e');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('로그인 실패: $e')),
+                          );
+                        }
+                      }
                     }
                   },
                   child: Text('로그인'),
