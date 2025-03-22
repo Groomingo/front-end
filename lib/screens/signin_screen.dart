@@ -31,7 +31,7 @@ class SignInScreen extends StatelessWidget {
                 // 로고 이미지
                 Container(
                   width: deviceWidth * 0.8, // 기기의 너비의 80%로 설정
-                  height: 150,
+                  height: 182,
                   child: Center(
                     child: Image.asset(
                       'assets/images/common/img_groomingo_logo_1.png', // 로고 이미지 경로
@@ -39,12 +39,14 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 32),
+                SizedBox(height: 58),
                 // 이메일 입력 인풋
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    labelText: '이메일',
+                    labelText: '이메일을 입력해주세요',
+                    labelStyle:
+                        TextStyle(color: AppColors.AppColors.grayColor_20),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -61,7 +63,9 @@ class SignInScreen extends StatelessWidget {
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    labelText: '비밀번호',
+                    labelText: '비밀번호를 입력해주세요',
+                    labelStyle:
+                        TextStyle(color: AppColors.AppColors.grayColor_20),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
