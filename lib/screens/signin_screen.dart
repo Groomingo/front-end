@@ -34,7 +34,7 @@ class SignInScreen extends StatelessWidget {
                   height: 150,
                   child: Center(
                     child: Image.asset(
-                      'assets/images/common/temp_logo.png', // 로고 이미지 경로
+                      'assets/images/common/img_groomingo_logo_1.png', // 로고 이미지 경로
                       fit: BoxFit.contain, // 이미지 비율 유지
                     ),
                   ),
