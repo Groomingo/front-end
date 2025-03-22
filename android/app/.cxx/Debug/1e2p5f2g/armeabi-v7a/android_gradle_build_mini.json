@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/cho-minwoo/Desktop/projects/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/cho-minwoo/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/cho-minwoo/Desktop/projects/groomingo/android/app/.cxx/Debug/1e2p5f2g/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/cho-minwoo/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/cho-minwoo/Desktop/projects/groomingo/android/app/.cxx/Debug/1e2p5f2g/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
