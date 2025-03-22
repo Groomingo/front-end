@@ -41,6 +41,7 @@ dependencies:
   go_router: ^14.8.0
   flutter_svg: ^1.0.3
   shared_preferences: ^2.0.6
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
