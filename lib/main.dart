@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -9,22 +11,38 @@ import 'package:groomingo/viewmodels/signin_viewmodel.dart';
 import 'package:groomingo/styles/colors.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // Hide status bar
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.bottom]);
-  await dotenv.load(fileName: ".env");
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
 
-  KakaoSdk.init(nativeAppKey: dotenv.get("KAKAO_NATIVE_APP_KEY"));
+    try {
+      await dotenv.load(fileName: ".env");
+      print('.env 파일 로드 성공');
+    } catch (e) {
+      print('.env 파일 로드 실패: $e');
+    }
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => SignInViewModel()),
-      ],
-      child: const MyApp(),
-    ),
-  );
+    try {
+      KakaoSdk.init(nativeAppKey: dotenv.get("KAKAO_NATIVE_APP_KEY"));
+      print('카카오 SDK 초기화 성공');
+    } catch (e) {
+      print('카카오 SDK 초기화 실패: $e');
+    }
+
+    // 나머지 코드
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => SignInViewModel()),
+        ],
+        child: const MyApp(),
+      ),
+    );
+  }, (error, stackTrace) {
+    print('예상치 못한 오류 발생: $error');
+    print(stackTrace);
+  });
 }
 
 class MyApp extends StatelessWidget {
