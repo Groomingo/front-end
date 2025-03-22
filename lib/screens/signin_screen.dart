@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:groomingo/models/kakao/kakao_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:groomingo/routes/routes.dart';
@@ -160,7 +161,7 @@ class SignInScreen extends StatelessWidget {
                 // 카카오로 시작하기 버튼
                 ElevatedButton(
                   onPressed: () {
-                    // 카카오 로그인 로직 추가
+                    KakaoLogin();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFFEE500), // 카카오 버튼 배경색
