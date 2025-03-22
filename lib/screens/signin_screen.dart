@@ -156,28 +156,23 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 120),
+                SizedBox(height: 72),
                 // 카카오로 시작하기 버튼
-                ElevatedButton.icon(
+                ElevatedButton(
                   onPressed: () {
                     // 카카오 로그인 로직 추가
                   },
-                  icon: SvgPicture.asset(
-                    'assets/icons/login/kakao_logo.svg', // 카카오 로고 이미지 경로
-                    width: 24,
-                    height: 24,
-                  ),
-                  label: Text('카카오로 시작하기'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFFEE500), // 카카오 버튼 배경색
                     foregroundColor: Colors.black, // 카카오 버튼 텍스트 색상
-                    textStyle:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    minimumSize: Size(double.infinity, 50),
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                    fixedSize: Size(66, 66), // 정확히 50x50 크기로 설정
+                    padding: EdgeInsets.all(16), // 내부 여백 제거
+                    shape: CircleBorder(), // 완전한 원형으로 설정
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/icons/login/kakao_logo.svg',
+                    width: 24,
+                    height: 24,
                   ),
                 ),
               ],
